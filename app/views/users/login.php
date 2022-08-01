@@ -1,4 +1,9 @@
-<?php require APPROOT . '/views/inc/header.php'; ?>
+<?php require APPROOT . '/views/inc/header.php';
+    if(isset($_COOKIE['login']) || $_COOKIE['login'] == "true"){
+        redirect('posts/index');
+        die();
+    }
+?>
 <div class="row">
     <div class="col-md-6 mx-auto">
         <div class="card bg-light mt-5">
@@ -20,7 +25,12 @@
                         <input type="password" name="password" class="form-control form-control-lg <?php echo (!empty($data['password_err'])) ? 'is-invalid' : '' ;?>" value="<?php echo $data['password'] ;?>">
                         <span class="invalid-feedback"><?php echo $data['password_err'] ;?> </span>
                     </div>
-
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="remember" disabled>
+                        <label class="form-check-label" for="remember">
+                            Remember Me
+                        </label>
+                    </div>
                     <div class="form-group">
                         <div class="row">
                             <div class="col">

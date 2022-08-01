@@ -1,4 +1,9 @@
-<?php require APPROOT . '/views/inc/header.php'; ?>
+<?php require APPROOT . '/views/inc/header.php'; 
+    if(isset($_COOKIE['login']) || $_COOKIE['login'] == "true"){
+        redirect('posts/index');
+        die();
+    }
+?>
 <div class="row">
     <div class="col-md-6 mx-auto">
         <div class="card bg-light mt-5">

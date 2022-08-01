@@ -1,4 +1,9 @@
-<?php require APPROOT . '/views/inc/header.php'; ?>
+<?php require APPROOT . '/views/inc/header.php'; 
+    if(!isset($_COOKIE['login']) || $_COOKIE['login'] != "true"){
+        redirect('users/login');
+        die();
+    }
+?>
     <?php flash('post_message'); ?>
   <div class="row ">
       <div class="col-md-8">

@@ -98,6 +98,9 @@ class Users extends Controller{
             if(empty($data['email_err']) && empty($data['password_err'])){
                 $loggedInUser = $this->userModel->login($data['email'], $data['password']);
                 if($loggedInUser){
+                    if(isset($_POST['remember'])){
+                        setcookie('login' ,'true' , time() +60*60*7);
+                    }
                     $this->createUserSession($loggedInUser);
                 }else{
                     $data['password_err'] = 'Password incorrect';
@@ -130,6 +133,7 @@ class Users extends Controller{
         unset($_SESSION['name']);
         unset($_SESSION['email']);
         session_destroy();
+        setcookie('login' ,'false' , time()-1);
         redirect('users/login');
     }
 }
