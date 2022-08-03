@@ -1,5 +1,5 @@
 <?php require APPROOT . '/views/inc/header.php'; 
-    if(!isset($_COOKIE['login']) || $_COOKIE['login'] != "true"){
+    if(!isset($_COOKIE['login']) && !isset($_SESSION['name'])){
         redirect('users/login');
         die();
     }
