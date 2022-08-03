@@ -20,29 +20,29 @@ class Users extends Controller{
             ];
 
             if(empty($data['name'])){
-                $data['name_err'] = 'Please enter name';
+                $data['name_err'] = 'Vui lòng nhập tên';
             }
 
             if(empty($data['email'])){
-                $data['email_err'] = 'Please enter email';
+                $data['email_err'] = 'Vui lòng nhập email';
             }else{
                 if($this->userModel->findUserByEmail($data['email'])){
-                    $data['email_err'] = 'Email already exist';
+                    $data['email_err'] = 'Email đã tồn tại';
                 }
             }
 
             if(empty($data['password'])){
-                $data['password_err'] = 'Please enter your password';
+                $data['password_err'] = 'Vui lòng nhập mật khẩu';
             }elseif(strlen($data['password']) < 6){
-                $data['password_err'] = 'Password must be atleast six characters';
+                $data['password_err'] = 'Mật khẩu chứa ít nhất 6 ký tự';
             }
 
             if(empty($data['confirm_password'])){
-                $data['confirm_password_err'] = 'Please confirm password';
+                $data['confirm_password_err'] = 'Vui lòng nhập lại mật khẩu';
             }else{
                 if($data['password'] != $data['confirm_password'])
                 {
-                    $data['confirm_password_err'] = 'Password does not match';
+                    $data['confirm_password_err'] = 'Mật khẩu không khớp';
                 }
             }
 
@@ -122,6 +122,13 @@ class Users extends Controller{
         $_SESSION['user_id'] = $user->id;
         $_SESSION['name'] = $user->name;
         $_SESSION['email'] = $user->email;
+
+        if(isset($_POST['remember'])){
+            $cookie_name = "login";
+            $cookie_value = "true";
+            setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
+        }
+
         redirect('posts/index');
     }
 
@@ -129,6 +136,8 @@ class Users extends Controller{
         unset($_SESSION['user_id']);
         unset($_SESSION['name']);
         unset($_SESSION['email']);
+        unset($_COOKIE['login']); 
+        setcookie('login', null, -1, '/'); 
         session_destroy();
         redirect('users/login');
     }
