@@ -1,7 +1,10 @@
 <?php require APPROOT . '/views/inc/header.php'; 
-    if(isset($_COOKIE['login']) && $_COOKIE['login'] == "true"){
+    if(!isset($_SESSION['name'])){
+        if(isset($_COOKIE['login']) && $_COOKIE['login'] == "true"){
+            redirect('posts/index');
+        }
+    }else{
         redirect('posts/index');
-        die();
     }
 ?>
 <div class="row">

@@ -71,10 +71,6 @@ class Users extends Controller{
     }
 
     public function login(){
-        if(isset($_COOKIE['login']) && $_COOKIE['login'] == "true"){
-            redirect("posts/index");
-           
-        }
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING); 
            $data = [
@@ -103,7 +99,7 @@ class Users extends Controller{
                 $loggedInUser = $this->userModel->login($data['email'], $data['password']);
                 if($loggedInUser){
                     if(isset($_POST['remember'])){
-                        setcookie('login' ,'true' , time() +60*60*7);
+                        setcookie('login' ,'true' , time() +60*60*7 , "/");
                     }
                     $this->createUserSession($loggedInUser);
                 }else{

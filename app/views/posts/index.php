@@ -1,7 +1,8 @@
 <?php require APPROOT . '/views/inc/header.php'; 
-    if(!isset($_COOKIE['login']) && !isset($_SESSION['name'])){
-        redirect('users/login');
-        die();
+    if(!isset($_SESSION['name'])){
+        if(!isset($_COOKIE['login'])){
+            redirect('users/login');
+        }
     }
 ?>
     <?php flash('post_message'); ?>
