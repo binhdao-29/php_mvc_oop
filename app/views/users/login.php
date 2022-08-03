@@ -21,10 +21,17 @@
                         <span class="invalid-feedback"><?php echo $data['password_err'] ;?> </span>
                     </div>
 
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="remember" name="remember" id="remember">
+                        <label class="form-check-label" for="remember">
+                            Remember Me
+                        </label>
+                    </div>
+
                     <div class="form-group">
                         <div class="row">
                             <div class="col">
-                                <input type="submit" class="btn btn-success btn-block pull-left" value="Login">
+                                <input type="submit" class="btn btn-success btn-block pull-left" value="login">
                             </div>
                             <div class="col">
                                 <a href="<?php echo URLROOT ;?>/users/register" class="btn btn-light btn-block pull-right">Bạn chưa có tài khoản? Đăng ký </a>
